@@ -15,7 +15,7 @@ func callbackMap(cfg *config.CliConfig) error {
 	nextLocation := config.GetConfig().NextLocationAreaURL
 	resp, err := cfg.Client.ListLocationArea(nextLocation)
 	if err != nil {
-		fmt.Printf("Error fetching areas: %v", err)
+		return fmt.Errorf("error fetching areas: %w", err)
 	}
 
 	fmt.Println("Locations:")
@@ -36,7 +36,7 @@ func callbackMapBack(cfg *config.CliConfig) error {
 	prevLocation := config.GetConfig().PrevLocationAreaURL
 	resp, err := cfg.Client.ListLocationArea(prevLocation)
 	if err != nil {
-		fmt.Printf("Error fetching areas: %v", err)
+		return fmt.Errorf("error fetching areas: %w", err)
 	}
 
 	fmt.Println("Locations:")
