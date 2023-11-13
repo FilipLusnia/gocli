@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/FilipLusnia/gocli/commands"
+	"github.com/FilipLusnia/gocli/config"
 )
 
 func startRepl() {
@@ -27,7 +28,11 @@ func startRepl() {
 			fmt.Println("Invalid command - type \"help\" for available commands")
 			continue
 		}
-		command.Callback()
+		err := command.Callback(config.GetConfig())
+		if err != nil {
+			fmt.Printf("Error: %s", err)
+			continue
+		}
 	}
 }
 
