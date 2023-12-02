@@ -8,14 +8,12 @@ import (
 )
 
 func callbackMap(cfg *config.CliConfig) error {
-	if cfg.NextLocationAreaURL == nil {
-		return errors.New("there is no next location")
-	}
-
-	nextLocation := config.GetConfig().NextLocationAreaURL
-	resp, err := cfg.Client.ListLocationArea(nextLocation)
+	resp, err := cfg.Client.ListLocationArea(cfg.NextLocationAreaURL)
 	if err != nil {
 		return fmt.Errorf("error fetching areas: %w", err)
+	}
+	if resp.Next == nil {
+		return errors.New("there is no next location")
 	}
 
 	fmt.Println("Locations:")
@@ -33,8 +31,7 @@ func callbackMapBack(cfg *config.CliConfig) error {
 		return errors.New("there is no previous location")
 	}
 
-	prevLocation := config.GetConfig().PrevLocationAreaURL
-	resp, err := cfg.Client.ListLocationArea(prevLocation)
+	resp, err := cfg.Client.ListLocationArea(cfg.PrevLocationAreaURL)
 	if err != nil {
 		return fmt.Errorf("error fetching areas: %w", err)
 	}

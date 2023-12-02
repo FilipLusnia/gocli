@@ -1,8 +1,13 @@
 package pokeapi
 
-import "net/http"
+import (
+	"net/http"
+
+	"github.com/FilipLusnia/gocli/internal/pokecache"
+)
 
 type Client struct {
+	cache      pokecache.Cache
 	httpClient http.Client
 }
 

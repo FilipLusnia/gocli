@@ -1,6 +1,10 @@
 package config
 
-import "github.com/FilipLusnia/gocli/internal/pokeapi"
+import (
+	"time"
+
+	"github.com/FilipLusnia/gocli/internal/pokeapi"
+)
 
 type CliConfig struct {
 	Client              pokeapi.Client
@@ -8,12 +12,12 @@ type CliConfig struct {
 	PrevLocationAreaURL *string
 }
 
-func GetConfig() *CliConfig {
-	cfg := CliConfig{
-		Client:              pokeapi.NewClient(),
-		NextLocationAreaURL: nil,
-		PrevLocationAreaURL: nil,
-	}
+var cfg = CliConfig{
+	Client:              pokeapi.NewClient(time.Hour),
+	NextLocationAreaURL: nil,
+	PrevLocationAreaURL: nil,
+}
 
+func GetConfig() *CliConfig {
 	return &cfg
 }
