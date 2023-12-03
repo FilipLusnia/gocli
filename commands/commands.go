@@ -5,7 +5,7 @@ import "github.com/FilipLusnia/gocli/config"
 type cliCommand struct {
 	name        string
 	description string
-	Callback    func(*config.CliConfig) error
+	Callback    func(*config.CliConfig, ...string) error
 }
 
 type commandList map[string]*cliCommand
@@ -21,6 +21,11 @@ func GetCommands() commandList {
 			name:        "mapb",
 			description: "Shows list of previous location areas",
 			Callback:    callbackMapBack,
+		},
+		"explore": {
+			name:        "explore {location_area}",
+			description: "Shows list of pokemon in given location area",
+			Callback:    callbackExplore,
 		},
 		"help": {
 			name:        "help",

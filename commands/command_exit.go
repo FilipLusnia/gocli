@@ -6,8 +6,7 @@ import (
 	"github.com/FilipLusnia/gocli/config"
 )
 
-func callbackExit(cfg *config.CliConfig) error {
+func callbackExit(cfg *config.CliConfig, args ...string) error {
 	os.Exit(0)
-
 	return nil
 }

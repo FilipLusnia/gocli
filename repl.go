@@ -16,21 +16,25 @@ func startRepl() {
 	for {
 		fmt.Print(" > ")
 		scanner.Scan()
+
 		cleanedText := cleanInput(scanner.Text())
 		if len(cleanedText) == 0 {
 			continue
 		}
+		args := []string{}
+		if len(cleanedText) > 1 {
+			args = cleanedText[1:]
+		}
 
 		availableCommands := commands.GetCommands()
-		commandName := cleanedText[0]
-		command, ok := availableCommands[commandName]
+		command, ok := availableCommands[cleanedText[0]]
 		if !ok {
 			fmt.Println("Invalid command - type \"help\" for available commands")
 			continue
 		}
-		err := command.Callback(config.GetConfig())
+		err := command.Callback(config.GetConfig(), args...)
 		if err != nil {
-			fmt.Printf("Error: %s", err)
+			fmt.Printf("Error: %s\n", err)
 			continue
 		}
 	}

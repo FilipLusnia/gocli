@@ -7,8 +7,8 @@ import (
 	"github.com/FilipLusnia/gocli/config"
 )
 
-func callbackMap(cfg *config.CliConfig) error {
-	resp, err := cfg.Client.ListLocationArea(cfg.NextLocationAreaURL)
+func callbackMap(cfg *config.CliConfig, args ...string) error {
+	resp, err := cfg.Client.ListLocationAreas(cfg.NextLocationAreaURL)
 	if err != nil {
 		return fmt.Errorf("error fetching areas: %w", err)
 	}
@@ -16,7 +16,7 @@ func callbackMap(cfg *config.CliConfig) error {
 		return errors.New("there is no next location")
 	}
 
-	fmt.Println("Locations:")
+	fmt.Println("Location areas:")
 	for _, area := range resp.Results {
 		fmt.Printf(" - %s\n", area.Name)
 	}
@@ -26,17 +26,17 @@ func callbackMap(cfg *config.CliConfig) error {
 	return nil
 }
 
-func callbackMapBack(cfg *config.CliConfig) error {
+func callbackMapBack(cfg *config.CliConfig, args ...string) error {
 	if cfg.PrevLocationAreaURL == nil {
 		return errors.New("there is no previous location")
 	}
 
-	resp, err := cfg.Client.ListLocationArea(cfg.PrevLocationAreaURL)
+	resp, err := cfg.Client.ListLocationAreas(cfg.PrevLocationAreaURL)
 	if err != nil {
 		return fmt.Errorf("error fetching areas: %w", err)
 	}
 
-	fmt.Println("Locations:")
+	fmt.Println("Location areas:")
 	for _, area := range resp.Results {
 		fmt.Printf(" - %s\n", area.Name)
 	}
