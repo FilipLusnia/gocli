@@ -27,6 +27,21 @@ func GetCommands() commandList {
 			description: "Shows list of pokemon in given location area",
 			Callback:    callbackExplore,
 		},
+		"catch": {
+			name:        "catch {pokemon_name}",
+			description: "Attempt to catch pokemon and add it to your pokedex",
+			Callback:    callbackCatch,
+		},
+		"inspect": {
+			name:        "inspect {pokemon_name}",
+			description: "Shows information about caught pokemon",
+			Callback:    callbackInspect,
+		},
+		"pokedex": {
+			name:        "pokedex",
+			description: "Shows list of caught pokemon",
+			Callback:    callbackPokedex,
+		},
 		"help": {
 			name:        "help",
 			description: "Shows available commands",
